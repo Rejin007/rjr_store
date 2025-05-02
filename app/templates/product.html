@@ -3,18 +3,47 @@
 {% block content %}
 
 <body class="body1">
-    <div>
+    <div class="itemcontainer">
+        <div class="item1">
+            <img class="item1 proimg" src="../media/{{product.product_image}}" alt="55">
+        </div>    
         <div>
-            <img src="../media/{{product.product_image}}" alt="55">
             <h2>{{product.product_name}}</h2>
-            <h3>₹ {{product.product_price}} <sup><small>00</small></sup></h3>
             <h3>₹ {{product.product_price}} <sup><small>00</small></sup></h3>
             <h3><span>M.R.P : <s>₹ {{product.product_mrp}}</s></span>
                 <span>({{product.product_offer}}% off)</span></h3>
             <h3>{{product.product_description}}</h3>
+            
+            <div class="item2">
+                <button onclick="subtract()"> - </button>&emsp;
+                <span id="cartbtn">1</span>&emsp;
+                <button onclick="addition()"> + </button><br><br>
+                <a href="{% url 'app:cartload' %}">PLACE ORDER</a>
+            </div>
+
         </div>
     </div>
 
+    <div style="padding-top: 200px;">
+
+    </div>
+    <script>
+        var count=1;
+        function addition(){
+            count++;
+            if(count>10){
+                count=1;
+            }
+            document.getElementById("cartbtn").innerHTML=count;
+        }
+        function subtract(){
+            count--;
+            if(count<1){
+                count=10;
+            }
+            document.getElementById("cartbtn").innerHTML=count;
+        }
+    </script>
 </body>
 
 {% endblock %}

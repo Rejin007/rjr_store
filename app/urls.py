@@ -16,5 +16,6 @@ urlpatterns = [
     path('district/<int:id>',views.districts,name = "districts"),
     path('products',views.get_products,name = "get_products"),
     path('product/<slug:slug>',views.get_product,name = "get_product"),
+    path('cart',views.cartload,name="cartload"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

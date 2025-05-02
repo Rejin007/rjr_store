@@ -121,17 +121,13 @@ footer > a{
 }
 .procontainer{
     /* backdrop-filter: blur(30px); */
-    /* background-color: rgb(0, 64, 255); */
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 .procard{
-    /* backdrop-filter: blur(20px); */
-    /* background-color: #0000007c; */
     background-image: linear-gradient(to top, #000000, #ffffff93);
     width: 200px;
-    /* height: 400px; */
     margin: 1%;
     padding: 1%;
     border-radius: 20px;
@@ -175,11 +171,75 @@ footer > a{
     padding-top: 15%;
 }
 .banner > h2{
-    padding-bottom: 30%;
+    padding-bottom: 15%;
     text-shadow: #b0b3af 0px 0px 10px;
     color: #000000;
-    -webkit-text-stroke: 1px rgb(255, 255, 255); 
+    -webkit-text-stroke: 1px rgb(201, 250, 175); 
     font-weight: bolder;
     font-size: 45px;
-
+}
+.itemcontainer{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0 10%;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    background-color: #000000;
+}
+.itemcontainer > div{
+    background-color: #6363634c;
+    width: 100%;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 20px;
+    flex-basis: 40%;
+    flex-grow: 1;
+}
+.itemcontainer > div:hover{
+    background-color: #0023e94c;
+    border: #ffffff 2px solid;
+}
+.proimg{
+    width: 100%;
+}
+.item1{
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+.item2{
+    background-color: #6363634c;
+    padding: 10px;
+    margin: 0 25%;
+    border-radius: 20px;
+    font-size: 25px;
+    flex-grow: 1;
+}
+.item2:hover{
+    background-color: #0023e94c;
+}
+.item2 > img{
+    width: 40px;
+}
+.item2 > button{
+    width: 20%;
+    font-size: 25px;
+    font-weight: bolder;
+    background-color: #15ff00;
+}
+.item2 > button:hover{
+    background-color: #ae00ffdc;
+}
+.item2 > a{
+        border-radius: 5px;
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-weight: bolder;
+        font-size: 20px;
+        padding: 10px;
+        background-color: #15ff00;
+}
+.item2 > a:hover{
+    background-color: #00ffffdc;
 }

@@ -37,3 +37,5 @@ def get_products(req):
 def get_product(req,slug):
     product = Products.objects.get(slug=slug)
     return render(req,"product.html",{'product': product})
+def cartload(req):
+    return render(req,"cart.html")

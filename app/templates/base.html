@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'app:homepage' %}">     Home     </a>
+            <a href="{% url 'app:contact' %}">     Contact  </a>
+            <a href="{% url 'app:about' %}">     About    </a>
+            <a href="{% url 'app:get_products' %}">     Products </a>
+            <a href="{% url 'app:loginpage' %}">     Log_in   </a>
+            <a href="rff">     Log_out  </a>
+            <a href="r7">     Cart     </a>
+            <a href="{% url 'app:address' %}">     adress   </a>
+        </nav><br>
+        <script>
+            window.onload = function() {
+                const navLinks = document.querySelectorAll('nav a'); 
+                const currentUrl = window.location.href; // Get the current URL
+                // Loop through all navigation links
+                navLinks.forEach(link => {
+                    // If the link matches the current URL (or path), highlight it
+                    if (link.href === currentUrl) {
+                        link.style.color = "#3cff00"; // Green
+                        link.style.fontWeight = "bold"; // Bold
+                    } else {
+                        link.style.color = "skyblue"; // skyblue
+                    }
+                });
+            };
+        </script>
+        <div class="search-bar">
+            <input type="search" placeholder="Search..." >
+            <button type="submit"><img width="30px" src="{% static 'assets/search.png' %}" alt=""></button>
+        </div>
+        
+        <script>
+            var searchBar = document.querySelector('.search-bar');
+            window.addEventListener('wheel', function(event) {
+              if (event.deltaY < 0) {
+                // Scrolling up
+                
+                searchBar.style.position = 'fixed';
+                searchBar.style.margin = '0 35% 0 35% ';
+              } else {
+                // Scrolling down
+                searchBar.style.position = 'fixed';
+                searchBar.style.margin = '0px 0 0 200% ';
+              }
+            });
+          </script>
+    </header>
+    <div style="margin-top: 12%;"></div>
+    {% block content %}
+
+    {% endblock %}
+    <footer>
+        <p>&copy; 2025 RJR. All rights reserved.</p>
+        <p>Follow us on social media:</p>
+        <a href="" target="_blank" >      <img width="30px"   title="facebook"   class="links"      src=    "{% static 'assets/facebook.png' %}"    alt="Facebook">     </a>
+        <a href="" target="_blank" >      <img width="30px"   title="twitter"    class="links"      src=    "{% static 'assets/twitter.png' %}"     alt="Twitter">      </a>
+        <a href="" target="_blank" >      <img width="30px"   title="instagram"  class="links"      src=    "{% static 'assets/instagram.png' %}"   alt="Instagram">    </a>
+        <a href="" target="_blank" >      <img width="30px"   title="youtube"    class="links"      src=    "{% static 'assets/youtube.png' %}"     alt="youtube">      </a>
+        <a href="" target="_blank" >      <img width="30px"   title="contact"    class="links"   src=    "{% static 'assets/whatsapp.png' %}"    alt="WhatsApp">     </a>
+
+        <a href="tel:+91 8590471041" target="_blank" >             <img  width="30px"   title="contact"    class="links"   src =    "{% static 'assets/phone.png' %}" alt="phone">     </a>
+        <a href="mailto:rejinrjr144@gmail.com" target="_blank" >    <img width="30px"    title="mail"      class="links"   src =    "{% static 'assets/mail.png' %}"   alt="mail">     </a>
+    </footer>
+</body>
+</html>

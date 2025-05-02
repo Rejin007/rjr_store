@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body class="body1">
+    <div class="banner">
+        <h1>PRODUCTS</h1>
+        <h2>Buy premium quality products with good build quality at offerdable price.</h2>
+    </div>
+    <div class="procontainer">
+        
+        {% for item in products %}
+        <div class="procard">
+            <img src="./media/{{item.product_image}}" alt="55">
+            <a href="{% url 'app:get_product' slug=item.slug %}" target="_blank">
+                <h3>{{item.product_name}}</h3>
+            </a>
+            <h3>₹ {{item.product_price}} <sup><small>00</small></sup></h3>
+            <h3><span>M.R.P : <s>₹ {{item.product_mrp}}</s></span>
+                <span>({{item.product_offer}}% off)</span></h3>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <body class="body1">
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="contact_form">
+                <h2>Register</h2>
+                <input type="text" placeholder="Enter username ........." name="username" required><br>
+                <input type="email" placeholder="Enter email ........." name="email" required><br>
+                <input type="password" placeholder="Enter password ........." name="password" required><br>
+                <input type="password" placeholder="Confirm password ........." name="confirm_password" required>
+                <input type="text" placeholder="Enter your first_name ........." name="firstname" required><br>
+                <input type="text" placeholder="Enter your last_name ........." name="lastname" required><br>
+                <input type="text" placeholder=" +91 Phone number" name="phone_number"  required></label><br>
+                <div style="text-align: left;padding-left: 5%;font-size: large;">
+                    <label>Date Of Birth  <br>
+                        <input style="width:95%;height: 35px;border-radius: 5px;outline: none;" type="date" placeholder="Enter your Date Of Birth" name="Date Of Birth" required>
+                    </label><br>
+                </div><br>
+                <select name="country" id="country">
+                    <option value="">Select Country</option>
+                    {% for country in countries %}
+                        <option value="{{country.id}}">{{country.country_name}}</option>
+                    {% endfor %}
+                </select>
+
+                <select name="states" id="states">
+                    <option value="">Select State</option>
+                    
+                </select>
+
+                <select name="city" id="district">
+                    <option value="">Select District</option>
+                    
+                </select><br><br>
+                <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+                <script>
+                    $(document).ready(function(){
+                        $('#country').change(function(){
+                            var country_id = $(this).val();
+                            
+                            if(country_id){
+                                $.ajax({
+                                    url : 'http://127.0.0.1:8000/home/state/'+country_id,
+                                    data : {'id':country_id},
+                                    success : function(data){
+                                        var selectstate = $('#states');
+                                        selectstate.empty();
+                                        selectstate.append('<option value="">Select State</option>');
+                                        $.each(data, function(index, statee){
+                                            selectstate.append('<option value="' + statee.id + '">' + statee.state_name + '</option>');
+                                        });
+                                    }
+                                })
+                            }
+                        })
+                        $('#states').change(function(){
+                            var state_id = $(this).val();
+                            if(state_id){
+                                $.ajax({
+                                    url : 'http://127.0.0.1:8000/home/district/'+state_id,
+                                    data : {'id':state_id},
+                                    success : function(data){
+                                        var selectdistrict = $('#district');
+                                        selectdistrict.empty();
+                                        selectdistrict.append('<option value="">Select District</option>');
+                                        $.each(data,function(index,districtee){
+                                            selectdistrict.append('<option value="'+districtee.id + '">' + districtee.district_name +'</option>');
+                                            
+                                        })
+                                    }
+                            
+                                })
+                            }
+                        })
+                    })
+                </script>
+
+                <label><input type="checkbox" required>I agree to the terms and conditions</label> <br><br>
+                 
+                <!-- <button type="submit">Sign_up</button> -->
+                <input type="submit" value="Sign_up">
+
+            </div>
+        </form>
+        
+    </body>
+{% endblock %}

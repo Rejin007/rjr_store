@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body class="body1">
+    <div>
+        <div>
+            <img src="../media/{{product.product_image}}" alt="55">
+            <h2>{{product.product_name}}</h2>
+            <h3>₹ {{product.product_price}} <sup><small>00</small></sup></h3>
+            <h3>₹ {{product.product_price}} <sup><small>00</small></sup></h3>
+            <h3><span>M.R.P : <s>₹ {{product.product_mrp}}</s></span>
+                <span>({{product.product_offer}}% off)</span></h3>
+            <h3>{{product.product_description}}</h3>
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

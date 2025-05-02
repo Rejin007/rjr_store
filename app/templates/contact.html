@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <body class="body1">
+        <h1 class="home1">Contact Us</h1>
+        <h2 class="home1 home2">We'd love to hear from you!</h2>
+        
+        <form method="post" class="contact_form" onsubmit="send(); return false;">
+            {% csrf_token %}
+            <!-- <h3>SEND MAIL</h3> -->
+            <input type="text" id="name" name="name" placeholder="Enter Your Name" required><br><br>
+            <input type="email" id="email" name="email" placeholder="Enter Your Email" required><br><br>
+            <input type="text" id="subject" name="subject" placeholder="Enter Your Subject" required><br><br>
+            <textarea id="message" name="message" rows="4" placeholder="Enter Your Message" required></textarea><br><br>
+            <input type="submit" value="SEND MAIL">
+        </form>
+
+        <script>
+            function send() {
+                const email = document.getElementById("email").value;
+                const name = document.getElementById("name").value;
+                const subject = document.getElementById("subject").value;
+                const body = document.getElementById("message").value;
+        
+                const mailtoLink = `mailto:rejinrjr144@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage: " + body)}`;
+        
+                window.location.href = mailtoLink;
+            }
+        </script>
+        
+    </body>
+{% endblock %}

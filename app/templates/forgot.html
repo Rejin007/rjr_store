@@ -8,12 +8,21 @@
                 {% csrf_token %}
                 <div class="contact_form">
                     <h2>Forgot Password</h2>
-                    <input type="email" placeholder="Enter your email" name="email" required><br><br>
-                    <input type="password" placeholder="Enter your password" name="email" required><br><br>
-                    <input type="password" placeholder="Confrin_password" name="email" required><br><br>
-                    <button type="submit">Send OTP</button>
-                    <input type="text" placeholder="OTP" name="otp" required><br><br>
+                    <input type="text" name="username"  placeholder="Username" required value="{{username}}"><br>
+                    <input type="email" placeholder="Enter your email" name="email" required  value="{{email}}"><br>
+                    <input type="password" placeholder="Enter your password" name="password" required value="{{password}}"><br>
+                    <input type="password" placeholder="Confrin_password" name="confirm_password" required value="{{confirm_password}}"><br><br>
+
+                {% if otp_sends %}
+                    <input type="text" placeholder="OTP" name="otp" required><br>
                     <button type="submit">Submit</button>
+                    
+                {% endif %}
+
+                {% if not otp_sends %}
+                    <a title="Click Here To refresh" href="{% url 'app:forgotrefresh' %}"> <img width="20px" src="{% static 'assets/refresh.png' %}" alt=""></a><br>
+                    <button type="submit">Send OTP</button>
+                {% endif %}
 
                 </div>
             </form>

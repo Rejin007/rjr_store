@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            font-size: 25px;
+            font-weight: bolder;
+        }
+        p{
+            font-size: 20px;
+        }
+        a{
+            padding: 10px;
+        }
+        body{
+            text-align: center;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <h2>Hi {{user.username}}</h2>
+    <p>
+        Thank you for signing up! <br>
+        To verify your account,please click the link below:
+    </p>
+    <a href="http://{{domain}}{% url 'app:activate' uidb64=uid token=token %}" target="_blank">
+        Verify you'r Account
+    </a>
+    <p>If you did not want to sign_up your account please ignore this mail</p>
+</body>
+</html>

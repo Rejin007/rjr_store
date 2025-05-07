@@ -2,28 +2,29 @@
 {% load static %}
 {% block content %}
 
-<body class="body1">
+<body class="body2">
     <div class="itemcontainer">
         <div class="item1">
             <img class="item1 proimg" src="../media/{{product.product_image}}" alt="55">
         </div>    
         <div>
-            <h2>{{product.product_name}}</h2>
+            <h1>{{product.product_name}}</h1>
             <h3>₹ {{product.product_price}} <sup><small>00</small></sup></h3>
-            <h3><span>M.R.P : <s>₹ {{product.product_mrp}}</s></span>
-                <span>({{product.product_offer}}% off)</span></h3>
+            <h3>M.R.P : 
+                <s>₹ {{product.product_mrp}}</s>
+                ({{product.product_offer}}% Off)</h3>
             <h3>{{product.product_description}}</h3>
             
             <div class="item2">
                 <button onclick="subtract()"> - </button>&emsp;
                 <span id="cartbtn">1</span>&emsp;
                 <button onclick="addition()"> + </button><br><br>
+                <a href="{% url 'app:cartload' %}">ADD TO CART</a><br><br>
                 <a href="{% url 'app:cartload' %}">PLACE ORDER</a>
             </div>
 
         </div>
     </div>
-
     <div style="padding-top: 200px;">
 
     </div>

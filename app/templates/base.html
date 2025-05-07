@@ -10,13 +10,22 @@
 <body>
     <header>
         <nav>
-            <a href="{% url 'app:homepage' %}">     Home     </a>
-            <a href="{% url 'app:contact' %}">     Contact  </a>
-            <a href="{% url 'app:about' %}">     About    </a>
+            <a href="{% url 'app:homepage' %}">         Home     </a>
+            <a href="{% url 'app:contact' %}">          Contact  </a>
+            <a href="{% url 'app:about' %}">            About    </a>
             <a href="{% url 'app:get_products' %}">     Products </a>
-            <a href="{% url 'app:loginpage' %}">     Log_in   </a>
-            <a href="rff">     Log_out  </a>
-            <a href="r7">     Cart     </a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'app:logout' %}">       Log_out  </a>
+            {% else %}
+                <a href="{% url 'app:loginpage' %}">    Log_in   </a>
+            {% endif %}
+
+            <details>
+                <summary>go to</summary>
+                <a href="{% url 'app:cartload' %}">     <img width="40px" src="{% static 'assets/cart.png' %}" alt="">     </a>
+
+            </details>
             <a href="{% url 'app:address' %}">     adress   </a>
         </nav><br>
         <script>
@@ -37,7 +46,7 @@
         </script>
         <div class="search-bar">
             <input type="search" placeholder="Search..." >
-            <button type="submit"><img width="30px" src="{% static 'assets/search.png' %}" alt=""></button>
+            <button type="submit"><img width="30px" src="{% static 'assets/search.png' %}" alt="search"></button>
         </div>
         
         <script>
@@ -67,7 +76,7 @@
         <a href="" target="_blank" >      <img width="30px"   title="twitter"    class="links"      src=    "{% static 'assets/twitter.png' %}"     alt="Twitter">      </a>
         <a href="" target="_blank" >      <img width="30px"   title="instagram"  class="links"      src=    "{% static 'assets/instagram.png' %}"   alt="Instagram">    </a>
         <a href="" target="_blank" >      <img width="30px"   title="youtube"    class="links"      src=    "{% static 'assets/youtube.png' %}"     alt="youtube">      </a>
-        <a href="" target="_blank" >      <img width="30px"   title="contact"    class="links"   src=    "{% static 'assets/whatsapp.png' %}"    alt="WhatsApp">     </a>
+        <a href="" target="_blank" >      <img width="30px"   title="contact"    class="links"      src=    "{% static 'assets/whatsapp.png' %}"    alt="WhatsApp">     </a>
 
         <a href="tel:+91 8590471041" target="_blank" >             <img  width="30px"   title="contact"    class="links"   src =    "{% static 'assets/phone.png' %}" alt="phone">     </a>
         <a href="mailto:rejinrjr144@gmail.com" target="_blank" >    <img width="30px"    title="mail"      class="links"   src =    "{% static 'assets/mail.png' %}"   alt="mail">     </a>

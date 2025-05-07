@@ -9,15 +9,22 @@
             <div class="contact_form">
                 <h2>Register</h2>
                 <input type="text" placeholder="Enter username ........." name="username" required><br>
+                <input type="text" placeholder="Enter your first_name ........." name="first_name" required><br>
+                <input type="text" placeholder="Enter your last_name ........." name="last_name" required><br>
                 <input type="email" placeholder="Enter email ........." name="email" required><br>
+                <input type="text" placeholder=" +91 Phone number" name="phonenumber"  required></label>
                 <input type="password" placeholder="Enter password ........." name="password" required><br>
-                <input type="password" placeholder="Confirm password ........." name="confirm_password" required>
-                <input type="text" placeholder="Enter your first_name ........." name="firstname" required><br>
-                <input type="text" placeholder="Enter your last_name ........." name="lastname" required><br>
-                <input type="text" placeholder=" +91 Phone number" name="phone_number"  required></label><br>
+                <input type="password" placeholder="Confirm password ........." name="confirmpassword" required><br><br>
+                
+                
+                <label class="gender" >
+                    <input type="radio" name="gender" value="Male">Male
+                    <input type="radio" name="gender" value="Female">Female
+                    <input type="radio" name="gender" value="Other" id="">Other
+                </label><br><br>
                 <div style="text-align: left;padding-left: 5%;font-size: large;">
                     <label>Date Of Birth  <br>
-                        <input style="width:95%;height: 35px;border-radius: 5px;outline: none;" type="date" placeholder="Enter your Date Of Birth" name="Date Of Birth" required>
+                        <input style="width:95%;height: 35px;border-radius: 5px;outline: none;" type="date" placeholder="Enter your Date Of Birth" name="dob" required>
                     </label><br>
                 </div><br>
                 <select name="country" id="country">
@@ -27,15 +34,24 @@
                     {% endfor %}
                 </select>
 
-                <select name="states" id="states">
+                <select name="state" id="states">
                     <option value="">Select State</option>
                     
                 </select>
 
-                <select name="city" id="district">
+                <select name="district" id="district">
                     <option value="">Select District</option>
                     
                 </select><br><br>
+
+                <label class="checkbox"><input type="checkbox" name="terms" required>I agree to the terms and conditions</label> <br><br>
+                 <details>
+                    <summary><strong>terms and conditions</strong></summary>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi itaque sunt in aspernatur hic repudiandae doloremque vitae cum delectus ipsam amet saepe officiis cupiditate animi beatae, praesentium facere.
+                 </details>
+                <!-- <button type="submit">Sign_up</button> -->
+                <input type="submit" value="Sign_up">
+                
                 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
                 <script>
@@ -79,12 +95,6 @@
                         })
                     })
                 </script>
-
-                <label><input type="checkbox" required>I agree to the terms and conditions</label> <br><br>
-                 
-                <!-- <button type="submit">Sign_up</button> -->
-                <input type="submit" value="Sign_up">
-
             </div>
         </form>
         

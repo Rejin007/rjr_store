@@ -8,21 +8,29 @@
             {% csrf_token %}
             <div class="contact_form">
                 <h2>Login</h2>
-                <input type="text" placeholder="Enter your username" name="username" required><br><br>
+                <input type="text" placeholder="Enter your username" name="username" value="{{username}}" required><br>
 
-                <input type="password" placeholder="Enter your password" name="password" required><br>
+                <input type="password" placeholder="Enter your password" name="password" value="{{password}}" required><br>
 
-                <a href="{% url 'app:forgotpassword' %}">Forgot Password?</a> 
-
-                <p>Don't have an account? <a href="{% url 'app:register' %}" title="click for Register">Register here</a>.</p>
-               
-                <button type="submit">Send Otp</button>
                 
-                <input type="text" placeholder="OTP" name="otp" required><br><br>
+                {% if otp_send %}
 
-                    <button type="submit">Log in</button>
+                <input type="text" placeholder="OTP" name="otp" pattern="[0-9]{6}" required><br><br>
+                <label class="checkbox"><input type="checkbox" name="cookie_box" value="cookie">save cookies</label>  <br><br> 
+
+                <button type="submit">Log in</button>
+                {% endif %}
+
+                {% if not otp_send %}
+                    <a class="hover" href="{% url 'app:forgotpassword' %}">Forgot Password?</a> 
+
+                    <p>Don't have an account? <a class="hover" href="{% url 'app:register' %}" title="click for Register">Register here</a>.</p>
+                    <a title="Click Here To refresh" href="{% url 'app:refresh' %}"> <img width="20px" src="{% static 'assets/refresh.png' %}" alt=""></a><br>
+                    <button type="submit">Send Otp</button>
+                {% endif %}
+
             </div>
         </form>
-        
+        <div style="padding-bottom: 20px;"></div>
     </body>
 {% endblock %}

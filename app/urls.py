@@ -16,6 +16,11 @@ urlpatterns = [
     path('district/<int:id>',views.districts,name = "districts"),
     path('products',views.get_products,name = "get_products"),
     path('product/<slug:slug>',views.get_product,name = "get_product"),
+    path('verify/<uidb64>/<token>',views.activate,name="activate"),
+    path('refresh',views.refresh,name="refresh"),
+    path('forgotrefresh',views.forgotrefresh,name="forgotrefresh"),
+    path('gsfthagfsdfgs',views.logout,name="logout"),
+    
     path('cart',views.cartload,name="cartload"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

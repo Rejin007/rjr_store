@@ -7,30 +7,38 @@
             {% csrf_token %}
             <div class="contact_form">
                 <h2>Adress</h2>
-                <input type="text" placeholder="Enter your Name" name="Name" required><br><br>
-                <input type="email" placeholder="Enter your Email" name="email" required><br><br>
-                <input type="text" placeholder=" +91 Phone number" name="Mobile Number" required><br><br>
-                <input type="text" placeholder="Street Name" name="Street" required><br><br>
-                <input type="text" placeholder="Appartment/Suit/House Number" name="email" required><br><br>
-                <input type="text" placeholder="Pin-code" name="email" required><br><br>
+                <input type="text" placeholder="Enter your Full Name" name="Name" required><br>
+                <input type="email" placeholder="Enter your Email" name="Email" required><br>
+                <input type="text" placeholder=" +91 Phone number" name="Mobile_Number" required><br>
+                
 
                 <select name="country" id="country">
                     <option value="">Select Country</option>
                     {% for country in countries %}
                         <option value="{{country.id}}">{{country.country_name}}</option>
                     {% endfor %}
-                </select>
+                </select>&ensp;
 
                 <select name="states" id="states">
                     <option value="">Select State</option>
                     
-                </select>
+                </select>&ensp;
 
-                <select name="city" id="district">
+                <select name="district" id="district">
                     <option value="">Select District</option>
                     
-                </select><br><br>
-                <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+                </select><br>
+
+                <input type="text" placeholder="Street Name" name="Street" required><br>
+                <input type="text" placeholder="Appartment/Suit/House Number or name" name="Appartment_Suit_House_Number" required><br>
+                <input type="text" placeholder="Pin-code" name="Pin_code" required><br>
+
+                <textarea name="comment" rows="4" id="" placeholder="Leave your Delevery Instruction Here ..."></textarea>
+
+                <input type="submit" value="Save Adress">
+            </div>
+        </form>
+            <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
                 <script>
                     $(document).ready(function(){
@@ -73,13 +81,5 @@
                         })
                     })
                 </script>
-                
-
-                <textarea name="comment" rows="4" id="" placeholder="Leave your Delevery Instruction Here ..."></textarea>
-
-                <input type="submit" value="Save Adress">
-            </div>
-        </form>
-
     </body>
 {% endblock %}

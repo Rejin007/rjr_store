@@ -74,7 +74,7 @@ class LoginForm(AuthenticationForm):
     otp = forms.CharField(label="otp",max_length=6,required=False)
     cookie_box = forms.BooleanField(label="cookie_box",required=False,widget=forms.CheckboxInput)
     
-class PasswordresetForm(forms.Form):
+class PasswordresetForm(forms.ModelForm):
     username = forms.CharField(label="username",max_length=50,required=True)
     email = forms.CharField(label="email",max_length=50,required=True)
     password  = forms.CharField(label="password",max_length=50,required=True,widget=forms.PasswordInput)
@@ -83,5 +83,22 @@ class PasswordresetForm(forms.Form):
 
     class Meta:
         model = User
-        fields = ['password']   
+        fields = ['password']  
+        
+class Adress(forms.ModelForm):
+    Name = forms.CharField(label="Name",max_length=50,required=True)
+    Email = forms.EmailField(label="Email",max_length=50,required=True)
+    Mobile_Number = forms.CharField(label="Mobile_Number",max_length=20,required=True)
+    Street = forms.CharField(label="Street",max_length=50,required=True)
+    Appartment_Suit_House_Number = forms.CharField(label="Appartment_Suit_House_Number",max_length=50,required=True)
+    Pin_code = forms.CharField(label="Pin_code",max_length=20,required=True)
+    country = forms.CharField(label="country",max_length=50,required=True)
+    states = forms.CharField(label="states",max_length=50,required=True)
+    district = forms.CharField(label="district",max_length=50,required=True)
+    comment = forms.CharField(label="comment",max_length=50,required=True)
+    
+    class Meta:
+        model = Adresses
+        fields = ['Name','Email','Mobile_Number','Street','Appartment_Suit_House_Number','Pin_code','country','states','district','comment',]
+    
     

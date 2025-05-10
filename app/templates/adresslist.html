@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body class="body1">
+
+    
+        {% for a in adress %}
+            {% if a.Email == user.email %}
+            <a href="" style="text-decoration: none;">
+                <div class="list">
+                    <div class="list2">
+                        <h2>{{ a.Name }}</h2>
+                        <!-- <h2>{{ a.Email }}</h2> -->
+                    
+                        <div style="display: flex;justify-content: center;flex-wrap: wrap;">
+                            <h2>{{ a.Appartment_Suit_House_Number }} ,</h2>&emsp;
+                            <h2>{{ a.Street }} ,</h2>&emsp;
+                        
+                        
+                             {% for d in districts %}
+                                {% if d.id == a.district %}
+                                    <h2>{{ d.district_name }} ,</h2>
+                                {% endif %}
+                            {% endfor %}&emsp;
+                        
+                            {% for s in state %}
+                                {% if s.id == a.states %}
+                                    <h2>{{ s.state_name }} ,</h2>
+                                {% endif %}
+                            {% endfor %}&emsp;
+                        
+                            <h2>{{ a.Pin_code }} ,</h2>&emsp;
+                        
+                            {% for c in countries %}
+                                {% if c.id == a.country %}
+                                    <h2>{{ c.country_name }} .</h2>
+                                {% endif %}
+                            {% endfor %}&emsp;
+                        
+                        </div>
+                        <h2>{{ a.Mobile_Number }}</h2>&emsp;
+                        <h2>{{ a.comment }}</h2>&emsp;
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+            
+        {% endfor %}
+        
+    
+    
+</body>
+{% endblock %}

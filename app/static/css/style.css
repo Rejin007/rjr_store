@@ -104,6 +104,7 @@ footer > a{
     border-radius: 5px;
     border: 1px solid #ffffff;
     font-size: 17px;
+    background-color: rgb(255, 255, 255);
 }
 .contact_form > textarea{
     width: 90%;
@@ -283,6 +284,7 @@ footer > a{
     border-radius: 4px;
     font-size: 20px;
 }
+
 .gender input[type="radio"]{
     width: 18px;
     height:18px;
@@ -290,4 +292,16 @@ footer > a{
 .checkbox input[type="checkbox"]{
     width: 18px;
     height:18px;
+}
+.list{
+    background-color: #8400ff70;
+    margin: 4% 10%;
+    padding: 1%;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+}
+.list:hover{
+    background-color: #3cff008c;
+    backdrop-filter: blur(20px);
+    color: #000000;
 }

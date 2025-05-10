@@ -1,1 +1,16 @@
-cart
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body class="body1">
+    {% for item in cart_items %}
+        <h2>NAME : {{item.product.product_name}}</h2>
+        <h2>QUANTITY : {{item.quantity}}</h2>
+        <h2>PRICE : {{item.product.product_price}}</h2>
+        <h2>TOTAL : {{item.item_total}}</h2>
+
+    {% endfor %}
+    <p><strong>Total : ₹ {{total}}</strong></p>
+</body>
+{% endblock %}

@@ -20,7 +20,9 @@ urlpatterns = [
     path('refresh',views.refresh,name="refresh"),
     path('forgotrefresh',views.forgotrefresh,name="forgotrefresh"),
     path('gsfthagfsdfgs',views.logout,name="logout"),
+    path('adresslist',views.adresslist,name="adresslist"),
     
+    path('add_to_cart/<slug:slug>',views.add_to_cart,name="add_to_cart"),
     path('cart',views.cartload,name="cartload"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

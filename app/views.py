@@ -21,7 +21,7 @@ import uuid
 from django.contrib.auth import authenticate,login,logout as djangologout
 import secrets
 from django.contrib.auth import get_user_model
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def homepage(request):
@@ -230,6 +230,19 @@ def forgotpassword(req):
 
 def address(req):
     countries = Countries.objects.all()
+    if req.method == 'POST':
+        form =Adress(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('app:homepage')
+            
+        else:
+            return render(req,"adress.html")
+            # print(form.errors)
+            # print(form)
+    else:
+        form =Adress()
+
     return render(req,"adress.html",{'countries': countries})
 
 def states(req,id):
@@ -244,5 +257,39 @@ def get_products(req):
 def get_product(req,slug):
     product = Products.objects.get(slug=slug)
     return render(req,"product.html",{'product': product})
+
+def add_to_cart(req,slug):
+    cart = req.session.get('cart',{})
+    if str(slug) in cart:
+        cart[str(slug)] -=1
+    else:
+        cart[str(slug)] = 1
+    req.session['cart']=cart
+    return redirect("app:cartload")
+
 def cartload(req):
-    return render(req,"cart.html")
+    cart = req.session.get('cart',{})
+    cart_items = []
+    total = 0
+    for slug,quantity in cart.items():
+        product = get_object_or_404(Products,slug=slug)
+        item_total = product.product_price * quantity
+        total += item_total
+        cart_items.append({
+            'product':product,
+            'quantity':quantity,
+            'item_total':item_total
+        })
+        
+    return render(req,"cart.html",{
+        'cart_items':cart_items,
+        'total':total
+    })
+
+def adresslist(req):
+    adress = Adresses.objects.all()
+    countries = Countries.objects.all()
+    state = States.objects.all()
+    districts = Districts.objects.all()
+    
+    return render(req,"adresslist.html",{"adress":adress,"countries":countries,"state":state,"districts":districts})

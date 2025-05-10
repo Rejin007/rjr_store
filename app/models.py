@@ -41,7 +41,7 @@ class Products(models.Model):
     
 class Signup(models.Model):
     username = models.CharField(name="username",max_length=50)
-    email = models.EmailField(name="email",max_length=50)
+    email = models.EmailField(name="email",max_length=50,unique=True)
     first_name = models.CharField(name="first_name",max_length=20)
     last_name = models.CharField(name="last_name",max_length=20)
     phonenumber = models.CharField(name="phonenumber",max_length=20)
@@ -59,3 +59,15 @@ class OTP(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def is_expired(self):
         return timezone.now()>self.created_at+datetime.timedelta(minutes=5)
+    
+class Adresses(models.Model):
+    Name = models.CharField(name="Name",max_length=50)
+    Email = models.EmailField(name="Email",max_length=50)
+    Mobile_Number = models.CharField(name="Mobile_Number",max_length=20)
+    Street = models.CharField(name="Street",max_length=50)
+    Appartment_Suit_House_Number = models.CharField(name="Appartment_Suit_House_Number",max_length=50)
+    Pin_code = models.CharField(name="Pin_code",max_length=20)
+    country = models.IntegerField(name="country")
+    states = models.IntegerField(name="states")
+    district = models.IntegerField(name="district")
+    comment = models.CharField(name="comment",max_length=50)

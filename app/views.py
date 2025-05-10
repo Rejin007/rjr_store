@@ -259,12 +259,18 @@ def get_product(req,slug):
     return render(req,"product.html",{'product': product})
 
 def add_to_cart(req,slug):
-    cart = req.session.get('cart',{})
-    if str(slug) in cart:
-        cart[str(slug)] -=1
+    form = Quantity(req.POST)
+    if form.is_valid():
+        quantity = form.cleaned_data.get('quantity')
+        print("this is quantity = "+str(quantity))
+        cart = req.session.get('cart',{})
+        if str(slug) in cart:
+            cart[str(slug)] += quantity
+        else:
+            cart[str(slug)] = quantity
+        req.session['cart']=cart
     else:
-        cart[str(slug)] = 1
-    req.session['cart']=cart
+        print("else ===",req.POST)
     return redirect("app:cartload")
 
 def cartload(req):

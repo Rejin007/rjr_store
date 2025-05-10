@@ -14,40 +14,40 @@
                 <s>₹ {{product.product_mrp}}</s>
                 ({{product.product_offer}}% Off)</h3>
             <h3>{{product.product_description}}</h3>
-            
-            <div class="item2">
-                <!-- <form method="post">
-                    {% csrf_token %} -->
-                <button onclick="subtract()"> - </button>&emsp;
-                
-                <input style="width: 24px;font-size: 20px;font-weight: bolder; color: black;" id="cartbtn" value="1" disabled>&emsp;
-                
-                <button onclick="addition()"> + </button><br><br>
-                <!-- </form> -->
-                <a href="{% url 'app:add_to_cart' slug=product.slug %}">ADD TO CART</a><br><br>
-                <a href="{% url 'app:adresslist' %}">PLACE ORDER</a>
-            </div>
+             
+                <form method="post" action="{% url 'app:add_to_cart' slug=product.slug %}">
+                    {% csrf_token %}
+                        &emsp;<input class="quantity1" id="cartbtn" name="quantity" value="1">&emsp;<br>
+                        <button class="quantity2" type="submit">ADD TO CART</button><br><br>
+                </form>
+<div class="item2">
+                        <button onclick="subtract()"> - </button>&emsp;&emsp;&emsp;
+                        <button onclick="addition()"> + </button><br><br>
 
+                    <a href="{% url 'app:adresslist' %}">PLACE ORDER</a>
+            </div>
+        
         </div>
     </div>
     <div style="padding-top: 200px;">
 
     </div>
     <script>
+        var num = document.getElementById("cartbtn")
         function subtract() {
             let value = parseInt(document.getElementById("cartbtn").value);
                 if (value == 1) {
-                    document.getElementById("cartbtn").value = 10;
+                    num.value = 10;
             } else {
-                document.getElementById("cartbtn").value = value - 1;
+                num.value = value - 1;
             }
         }
         function addition() {
             let value = parseInt(document.getElementById("cartbtn").value);
                 if (value >= 10) {
-                    document.getElementById("cartbtn").value = 1;
+                    num.value = 1;
             } else {
-                document.getElementById("cartbtn").value = value + 1;
+                num.value = value + 1;
             }
         }
         

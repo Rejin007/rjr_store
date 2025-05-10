@@ -305,3 +305,20 @@ footer > a{
     backdrop-filter: blur(20px);
     color: #000000;
 }
+.quantity1{
+    width: 24px;
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
+    background-color: aqua;
+    pointer-events: none;
+}
+.quantity2{
+    background-color: rgb(0, 255, 64);
+    font-size: 18px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.quantity2:hover{
+    background-color: rgb(211, 254, 0);
+}

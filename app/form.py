@@ -101,4 +101,5 @@ class Adress(forms.ModelForm):
         model = Adresses
         fields = ['Name','Email','Mobile_Number','Street','Appartment_Suit_House_Number','Pin_code','country','states','district','comment',]
     
-    
+class Quantity(forms.Form):
+    quantity = forms.IntegerField(label="quantity",min_value=1, initial=1)

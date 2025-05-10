@@ -5,12 +5,13 @@
 
 <body class="body1">
     {% for item in cart_items %}
+    <div style="background-color: blue;">
         <h2>NAME : {{item.product.product_name}}</h2>
         <h2>QUANTITY : {{item.quantity}}</h2>
-        <h2>PRICE : {{item.product.product_price}}</h2>
-        <h2>TOTAL : {{item.item_total}}</h2>
-
+        <h2>PRICE : ₹ {{item.product.product_price}}  <sup><small>00</small></sup></h2>
+        <h2>TOTAL : ₹  {{item.item_total}} <sup><small>00</small></sup></h2>
+    </div>
     {% endfor %}
-    <p><strong>Total : ₹ {{total}}</strong></p>
+    <h1 style="background-color: rgb(60, 255, 0);" ><strong>ALL PRODUCTS Total AMOUNT : ₹ {{total}}</strong> <sup><small>00</small></sup></h1>
 </body>
 {% endblock %}

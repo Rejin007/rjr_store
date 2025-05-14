@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body class="body1">
+    <div class="list">
+        {% for item in product %}
+        <span class="list41">
+            <a style="text-decoration: none;" title="add quantity" href="{% url 'app:get_product' slug=item.slug %}" target="_top">
+                <img class="list10" src="../media/{{ item.product_image }}" alt="5">
+                
+                <h2>NAME : {{item.product_name}} </h2>
+                <h3>PRICE : ₹ {{item.product_price}} <sup><small>00</small></sup></h3>
+                <h3><span>M.R.P : <s>₹ {{item.product_mrp}}</s></span>
+                    <span>({{item.product_offer}}% off)</span>
+                </h3>
+            </a>
+        </span>
+        {% empty %}
+        <!-- <h1>No matching products found.</h1> -->
+        <script>
+            alert("No matching products found.");
+        </script>
+        {% endfor %}
+    </div>
+    
+</body>
+{% endblock %}

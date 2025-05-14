@@ -4,14 +4,44 @@
 {% block content %}
 
 <body class="body1">
-    {% for item in cart_items %}
-    <div style="background-color: blue;">
-        <h2>NAME : {{item.product.product_name}}</h2>
-        <h2>QUANTITY : {{item.quantity}}</h2>
-        <h2>PRICE : ₹ {{item.product.product_price}}  <sup><small>00</small></sup></h2>
-        <h2>TOTAL : ₹  {{item.item_total}} <sup><small>00</small></sup></h2>
+    <h1 class="home1" style="font-size: 200px;">CART</h1>
+    <div class="list7 ">
+        <div class="list">
+            {% for item in cart_items %}
+
+            <div class="list4">
+                <span>
+                    <a style="text-decoration: none;" title="add quantity"
+                        href="{% url 'app:get_product' slug=item.product.slug %}" target="_top">
+                        <img class="list10" src="./media/{{ item.product.product_image }}" alt="5">
+
+                        <h2>NAME : {{item.product.product_name}} </h2>
+                        <h2>QUANTITY : {{item.quantity}} </h2>
+                        <h2>PRICE : ₹ {{item.product.product_price}} <sup><small>00</small></sup></h2>
+                        <h2>TOTAL : ₹ {{item.item_total}} <sup><small>00</small></sup></h2>
+                    </a>
+                </span>
+
+                <a id="list4" href="{% url 'app:reser_quantity' item.product.slug %}"
+                    onclick="return confirm('Are you sure you want to reset your product quantity?');">RESET
+                    QUANTITY</a><br><br><br>
+                <a id="list4" href="{% url 'app:remove_item' item.product.slug %}"
+                    onclick="return confirm('Are you sure you want to delete this item?');">DELETE ITEM</a>&emsp;
+                <a id="list5" href="{% url 'app:adresslist' %}">PLACE ORDER</a>
+            </div>
+
+            {% endfor %}
+        </div>
+        <div class="list5">
+            <h1><strong>TOTAL AMOUNT =<span style="color: rgb(255, 255, 255);"> ₹
+                        {{total}}</strong> <sup><small>00</small></sup></span></h1>
+            <a id="list4" class="list6" href="{% url 'app:clear_cart' %}"
+                onclick="return confirm('Are you sure you want to delete all item?');">DELETE ALL</a>&emsp;
+            <a id="list5" class="list6" href="{% url 'app:adresslist' %}">PLACE ORDER</a><br><br><br>
+
+        </div>
     </div>
-    {% endfor %}
-    <h1 style="background-color: rgb(60, 255, 0);" ><strong>ALL PRODUCTS Total AMOUNT : ₹ {{total}}</strong> <sup><small>00</small></sup></h1>
+
+
 </body>
 {% endblock %}

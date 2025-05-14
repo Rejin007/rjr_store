@@ -22,7 +22,15 @@ from django.contrib.auth import authenticate,login,logout as djangologout
 import secrets
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+# from django.contrib.postgres.search import TrigramSimilarity
+# from django.db.models import Q
 
+class MyProtectedView(LoginRequiredMixin,TemplateView):
+    template_name = "contact.html"
+    login_url = "/login/"
+    
 # Create your views here.
 def homepage(request):
     return render(request,"home.html")
@@ -251,12 +259,33 @@ def states(req,id):
 def districts(req,id):
     districts = Districts.objects.filter(state_id=id).values('id','district_name')
     return JsonResponse(list(districts),safe=False)
+
+# @login_required
 def get_products(req):
     products = Products.objects.all()
     return render(req,"products.html",{'products': products})
+
 def get_product(req,slug):
     product = Products.objects.get(slug=slug)
     return render(req,"product.html",{'product': product})
+
+def remove_item(req,slug):            # clear selected cart items
+    cart = req.session.get('cart',{})
+    if str(slug) in cart:
+        del cart[str(slug)]
+        req.session['cart'] = cart
+    return redirect("app:cartload")
+
+def reser_quantity(req,slug):            # clear selected cart items
+    cart = req.session.get('cart',{})
+    if str(slug) in cart:
+        cart[str(slug)]=int(1)
+        req.session['cart'] = cart
+    return redirect("app:cartload")
+
+def clear_cart(req):            # clear all cart items
+    req.session['cart'] = {}
+    return redirect('app:cartload')
 
 def add_to_cart(req,slug):
     form = Quantity(req.POST)
@@ -265,7 +294,10 @@ def add_to_cart(req,slug):
         print("this is quantity = "+str(quantity))
         cart = req.session.get('cart',{})
         if str(slug) in cart:
-            cart[str(slug)] += quantity
+            if quantity:    
+                cart[str(slug)] += quantity
+            else:
+                cart[str(slug)] -= quantity
         else:
             cart[str(slug)] = quantity
         req.session['cart']=cart
@@ -299,3 +331,11 @@ def adresslist(req):
     districts = Districts.objects.all()
     
     return render(req,"adresslist.html",{"adress":adress,"countries":countries,"state":state,"districts":districts})
+
+def search_bar(req):
+    query = req.GET.get("search").strip()
+    if query:
+        product = Products.objects.filter(product_name__icontains = query)
+    else:
+        product = Products.objects.all()
+    return render(req,"search.html",{"product":product})

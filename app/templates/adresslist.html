@@ -4,17 +4,18 @@
 {% block content %}
 
 <body class="body1">
+    <h1>MY ADRESS</h1>
 
-    
+    <span class="list">
         {% for a in adress %}
             {% if a.Email == user.email %}
             <a href="" style="text-decoration: none;">
-                <div class="list">
+                
                     <div class="list2">
-                        <h2>{{ a.Name }}</h2>
-                        <!-- <h2>{{ a.Email }}</h2> -->
+                        <!-- <h2>NAME  : {{ a.Name }}</h2> -->
+                        <!-- <h2>EMAIL : {{ a.Email }}</h2> -->
                     
-                        <div style="display: flex;justify-content: center;flex-wrap: wrap;">
+                        <span class="list3">
                             <h2>{{ a.Appartment_Suit_House_Number }} ,</h2>&emsp;
                             <h2>{{ a.Street }} ,</h2>&emsp;
                         
@@ -37,19 +38,20 @@
                                 {% if c.id == a.country %}
                                     <h2>{{ c.country_name }} .</h2>
                                 {% endif %}
-                            {% endfor %}&emsp;
+                            {% endfor %}&emsp;<br>
                         
-                        </div>
-                        <h2>{{ a.Mobile_Number }}</h2>&emsp;
+                        </span>
+                        <h2>Contact : {{ a.Mobile_Number }} ;</h2>&emsp;
                         <h2>{{ a.comment }}</h2>&emsp;
                     </div>
-                </div>
+                    
+                
             </a>
             {% endif %}
             
         {% endfor %}
         
-    
+    </span>
     
 </body>
 {% endblock %}

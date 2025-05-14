@@ -8,6 +8,7 @@
             {% csrf_token %}
             <div class="contact_form">
                 <h2>Login</h2>
+                <!-- <input type="hidden" name="next" value="{{ next }}"> -->
                 <input type="text" placeholder="Enter your username" name="username" value="{{username}}" required><br>
 
                 <input type="password" placeholder="Enter your password" name="password" value="{{password}}" required><br>

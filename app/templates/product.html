@@ -14,6 +14,7 @@
                 <s>₹ {{product.product_mrp}}</s>
                 ({{product.product_offer}}% Off)
             </h3>
+            
             <h3>{{product.product_description}}</h3>
 
             <form method="post" action="{% url 'app:add_to_cart' slug=product.slug %}">
@@ -25,7 +26,7 @@
                 <button onclick="subtract()"> - </button>&emsp;&emsp;&emsp;
                 <button onclick="addition()"> + </button><br><br>
 
-                <a href="{% url 'app:adresslist' %}">PLACE ORDER</a>
+                <a href="{% url 'app:place_order' slug=product.slug %}">PLACE ORDER</a>
             </div>
 
         </div>

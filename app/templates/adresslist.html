@@ -6,16 +6,15 @@
 <body class="body1">
     <h1>MY ADRESS</h1>
 
-    <span class="list">
+    <div class="list">
         {% for a in adress %}
             {% if a.Email == user.email %}
+
             <a href="" style="text-decoration: none;">
                 
                     <div class="list2">
-                        <!-- <h2>NAME  : {{ a.Name }}</h2> -->
-                        <!-- <h2>EMAIL : {{ a.Email }}</h2> -->
                     
-                        <span class="list3">
+                        <div class="list3" style="display: flex;">
                             <h2>{{ a.Appartment_Suit_House_Number }} ,</h2>&emsp;
                             <h2>{{ a.Street }} ,</h2>&emsp;
                         
@@ -40,7 +39,7 @@
                                 {% endif %}
                             {% endfor %}&emsp;<br>
                         
-                        </span>
+                        </div>
                         <h2>Contact : {{ a.Mobile_Number }} ;</h2>&emsp;
                         <h2>{{ a.comment }}</h2>&emsp;
                     </div>
@@ -51,7 +50,7 @@
             
         {% endfor %}
         
-    </span>
+    </div>
     
 </body>
 {% endblock %}

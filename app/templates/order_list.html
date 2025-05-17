@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<body class="body1">
+    <h1>Your Orders</h1>
+    <div class="list">
+        {% for order,ord in zipp %}
+            <div class="placeorder1 placeorder2">
+                <h3><span>Order_id </span> : {{ord.id}}</h3>
+                <h3><span>Order Placed_at</span> : {{order.order_at}}</h3>
+                <h3><span>Quantity </span> : {{order.quantity}} .</h3>
+                <h3><span>Product Name </span> : {{order.product.product_name}} .</h3>
+                <h3><span>Price</span> : ₹ {{order.product.product_price}} /-</h3>
+                <!-- <h3><span>M.R.P</span> : ₹ {{order.product.product_mrp}} /-</h3> -->
+                <h3><span>Total-Price</span> : ₹ {{order.total_price}} /-</h3>
+
+                {% if order.adress %}
+                <h3><span>Delivery Address</span>:
+                    {{ order.adress.Appartment_Suit_House_Number }},
+                    {{ order.adress.Street }},
+
+                    {% for d in districts %}
+                        {% if d.id == order.adress.district %}
+                            {{ d.district_name }},
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for s in state %}
+                        {% if s.id == order.adress.states %}
+                            {{ s.state_name }},
+                        {% endif %}
+                    {% endfor %}
+
+                    {% for c in countries %}
+                        {% if c.id == order.adress.country %}
+                            {{ c.country_name }}.
+                        {% endif %}
+                    {% endfor %}
+                    Pin Code: {{ order.adress.Pin_code }}
+                </h3>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

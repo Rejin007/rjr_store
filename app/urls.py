@@ -2,7 +2,7 @@ from django.urls import path
 from app import views
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import MyProtectedView
+# from .views import MyProtectedView
 
 app_name = 'app'
 
@@ -10,7 +10,7 @@ urlpatterns = [
     path('',views.homepage, name = 'homepage'),
     path('about',views.about,name = "about"),
     path('contact',views.contact,name = "contact"),
-    path('login',views.loginpage,name = "loginpage"),
+    path('login/',views.loginpage,name = "loginpage"),
     path('register',views.register,name = "register"),
     path('forgotpassword',views.forgotpassword,name = "forgotpassword"),
     path('address',views.address,name = "address"),
@@ -29,6 +29,9 @@ urlpatterns = [
     path('add_to_cart/<slug:slug>',views.add_to_cart,name = "add_to_cart"),
     path('cart',views.cartload,name = "cartload"),
     path('search_bar/',views.search_bar,name = "search_bar"),
-    path('protected',MyProtectedView.as_view(),name = "protected_view")
+    # path('protected',MyProtectedView.as_view(),name = "protected_view")
+    path('place-order/<slug:slug>',views.place_order,name = "place_order"),
+    path('order-sucess/<int:order_id>',views.order_sucess,name='order_sucess'),
+    path('order_list',views.order_list,name='order_list'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

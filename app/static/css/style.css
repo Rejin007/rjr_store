@@ -312,7 +312,6 @@ footer > a{
     flex-flow: 1;
     width: 60%;
     margin: 15%;
-
     border-radius: 20px;
     backdrop-filter: blur(20px);
     font-family: 'Times New Roman', Times, serif;
@@ -422,4 +421,55 @@ footer > a{
 }
 .quantity2:hover{
     background-color: rgb(211, 254, 0);
+}
+
+.placeor1 img{
+    width: 100%;
+    border-radius: 20px;
+    margin: 13% 0;
+}
+.placeor1 input[type="number"],span{
+    width: 40px;
+    height: 20px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.placeor1 input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+.adress1 {
+    background-color: #000000;
+    color: white;
+    padding: 15px;
+    margin: 0 10%;
+    border-radius: 20px;
+    text-align: left;
+    font-size: 18px;
+}
+.adress1 input[type="radio"]{
+    width: 20px;
+    height: 20px;
+}
+.adress1:hover{
+    background-color: #25005c;
+    /* color: #000000; */
+    /* font-weight: 550; */
+}
+.placeorder1{
+    background-color: rgb(0, 0, 0);
+    /* backdrop-filter: blur(30px); */
+    padding: 40px;
+    margin: 5% 35%;
+    border-radius: 20px;
+    text-align: left;
+}
+.placeorder1 span{
+    color: tomato;
+}
+.placeorder1 h3{
+    color: rgb(0, 255, 38);
+}
+.placeorder2{
+    margin: 2% 35%;
 }

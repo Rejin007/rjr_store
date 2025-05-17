@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<body class="body1">
+    <h1>Your Order Placed Successfully</h1>
+    <div  class="placeorder1">
+        <h3><span>Order ID :</span> {{ order_id }}</h3>
+        <h3><span>Product Name :</span> {{ product.product_name }}</h3>
+        <h3><span>Quantity :</span> {{ orderitem.quantity }} nos.</h3>
+        <h3><span>Product Price :</span> ₹ {{ product.product_price }} /-</h3>
+        <h3><span>Product M.R.P :</span> ₹ {{ product.product_mrp }} /-</h3>
+        <h3><span>Total Price:</span> ₹ {{ orderitem.total_price }} /-</h3>
+        <h3><span>Delivery Address :</span> &emsp;{{adress.Appartment_Suit_House_Number}}&emsp;{{adress.Street}}&emsp;{{districts.district_name}}&emsp;{{state.state_name}}&emsp;{{countries.country_name}}&emsp;Pin_code : {{adress.Pin_code}};</h3>
+    </div>
+</body>
+{% endblock %}

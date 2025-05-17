@@ -61,6 +61,7 @@ class OTP(models.Model):
         return timezone.now()>self.created_at+datetime.timedelta(minutes=5)
     
 class Adresses(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     Name = models.CharField(name="Name",max_length=50)
     Email = models.EmailField(name="Email",max_length=50)
     Mobile_Number = models.CharField(name="Mobile_Number",max_length=20)
@@ -71,3 +72,21 @@ class Adresses(models.Model):
     states = models.IntegerField(name="states")
     district = models.IntegerField(name="district")
     comment = models.CharField(name="comment",max_length=50)
+    
+class Order(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    total_price = models.IntegerField(default=0)
+    
+    def __str__(self):
+        return f"Order {self.id} by {self.user.username}"
+    
+class Orderitem(models.Model):
+    order = models.ForeignKey(Order,on_delete=models.CASCADE,related_name="items")
+    product = models.ForeignKey(Products,on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    total_price = models.IntegerField(default=0)
+    user = models.ForeignKey(User,on_delete=models.CASCADE, null=True, blank=True)
+    order_at = models.DateTimeField(auto_now_add=True)
+    adress = models.ForeignKey(Adresses,on_delete=models.CASCADE)
+    

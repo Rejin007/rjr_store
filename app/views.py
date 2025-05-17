@@ -27,9 +27,9 @@ from django.views.generic import TemplateView
 # from django.contrib.postgres.search import TrigramSimilarity
 # from django.db.models import Q
 
-class MyProtectedView(LoginRequiredMixin,TemplateView):
-    template_name = "contact.html"
-    login_url = "/login/"
+# class MyProtectedView(LoginRequiredMixin,TemplateView):
+#     template_name = "contact.html"
+#     login_url = "/login/"
     
 # Create your views here.
 def homepage(request):
@@ -119,6 +119,7 @@ def forgotrefresh(req):
         OTP.objects.all().delete()  # delete otp when any store in db
     return redirect("app:forgotpassword")
 
+@login_required
 def logout(req):
     djangologout(req)
     response = redirect("app:homepage")
@@ -236,13 +237,31 @@ def forgotpassword(req):
 
     return render(req,"forgot.html",{"title":title})
 
+@login_required
 def address(req):
     countries = Countries.objects.all()
     if req.method == 'POST':
         form =Adress(req.POST)
         if form.is_valid():
-            form.save()
-            return redirect('app:homepage')
+            try:
+                Adresses.objects.create(
+                    user = req.user,
+                    Name = form.cleaned_data.get('Name'),
+                    Email = form.cleaned_data.get('Email'),
+                    Mobile_Number = form.cleaned_data.get('Mobile_Number'),
+                    Street = form.cleaned_data.get('Street'),
+                    Appartment_Suit_House_Number = form.cleaned_data.get('Appartment_Suit_House_Number'),
+                    Pin_code = form.cleaned_data.get('Pin_code'),
+                    country = form.cleaned_data.get('country'),
+                    states = form.cleaned_data.get('states'),
+                    district = form.cleaned_data.get('district'),
+                    comment = form.cleaned_data.get('comment')
+                )
+                # form.save()
+                return redirect('app:homepage') 
+            except:
+                pass
+            
             
         else:
             return render(req,"adress.html")
@@ -260,7 +279,6 @@ def districts(req,id):
     districts = Districts.objects.filter(state_id=id).values('id','district_name')
     return JsonResponse(list(districts),safe=False)
 
-# @login_required
 def get_products(req):
     products = Products.objects.all()
     return render(req,"products.html",{'products': products})
@@ -323,7 +341,8 @@ def cartload(req):
         'cart_items':cart_items,
         'total':total
     })
-
+    
+@login_required
 def adresslist(req):
     adress = Adresses.objects.all()
     countries = Countries.objects.all()
@@ -339,3 +358,65 @@ def search_bar(req):
     else:
         product = Products.objects.all()
     return render(req,"search.html",{"product":product})
+
+@login_required
+def place_order(req,slug):
+    
+    form =  Orderdetails(req.POST)
+    adress = Adresses.objects.all()
+    countries = Countries.objects.all()
+    state = States.objects.all()
+    districts = Districts.objects.all()
+    if req.method=='POST':
+        if form.is_valid():
+            # product_ids = form.getlist('product_ids')
+            # quantities = form.getlist('quantities')
+            product_ids = req.POST.getlist('product_ids')
+            quantities = req.POST.getlist('quantities')
+
+            if not product_ids or not quantities:
+
+                return render(req,'place_order.html',{'error':'no items selected'})
+
+            order = Order.objects.create(user=req.user)
+            
+
+            for pid,qty in zip(product_ids,quantities):
+
+                product = Products.objects.get(id=int(pid))
+                total = product.product_price * int(qty)
+                adress = Adresses.objects.get(id=int(req.POST.get('adress')))
+                Orderitem.objects.create(order = order,product = product,quantity = int(qty),total_price=total,user=req.user,order_at=order.created_at,adress=adress)
+                
+                return redirect('app:order_sucess',order_id = order.id)
+            
+    # products = Products.objects.all()
+    products = Products.objects.get(slug=slug)
+    
+        
+    return render(req,'place_order.html',{'products':products,'adress':adress,"countries":countries,"state":state,"districts":districts})
+
+@login_required     
+def order_sucess(req,order_id):
+    orderitem = Orderitem.objects.get(order_id=order_id)
+    adress = Adresses.objects.get(id=orderitem.adress.id)
+    countries = Countries.objects.get(id=adress.country)
+    state = States.objects.get(id=adress.states)
+    districts = Districts.objects.get(id=adress.district)
+    product = Products.objects.get(id=orderitem.product.id)
+    
+    return render(req,"order_sucess.html",{'order_id':order_id,'orderitem':orderitem,'adress':adress,'countries':countries,'state':state,'districts':districts,'product':product}) 
+
+@login_required
+def order_list(req):
+    
+    orderitem = Orderitem.objects.filter(user=req.user).select_related('adress', 'product')
+    countries = Countries.objects.all()
+    order = Order.objects.all()
+    state = States.objects.all()
+    districts = Districts.objects.all()
+    product = Products.objects.all()
+    
+    zipp=zip(orderitem,order)
+    
+    return render(req,"order_list.html",{'order':order,'orderitem':orderitem,'countries':countries,'state':state,'districts':districts,'product':product,'zipp':zipp}) 

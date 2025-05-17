@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<body class="body1">
+    <form method="post" class="itemcontainer">
+        {% csrf_token %}
+        <div class="item1 placeor1">
+            <img src="../media/{{products.product_image}}" alt="8">
+        </div>
+
+        <div class="placeor1">
+
+            <h1>{{products.product_name}}</h1>
+            <h3>Price : ₹ {{products.product_price}} <sup><small>00</small></sup></h3>
+            <h3>M.R.P :
+                <s>₹ {{products.product_mrp}}</s>
+                ({{products.product_offer}}% Off)
+            </h3>
+            <!-- <button onclick="subtract()"> - </button> -->
+            <label><span>Quantity :</span>
+                <input type="number" name="quantities" min="1" max="50" id="" value="1">
+            </label>
+
+            <!-- <button onclick="addition()"> + </button> --><br><br>
+            <div class="adress1">
+                <h3 style="text-align: center;">Select Delivery Address</h3>
+                {% for adres in adress %}
+                    {% if user.email == adres.Email %}
+                    <label>
+                        <input type="radio" name="adress" value="{{adres.id}}" id="" required>
+                        {{adres.Appartment_Suit_House_Number}},{{adres.Street}},{{adres.Pin_code}},
+                        {% for d in districts %}
+                            {% if d.id == adres.district %}
+                                {{d.district_name}},
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for s in state %}
+                            {% if s.id == adres.states %}
+                                {{s.state_name}},
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for c in countries %}
+                            {% if c.id == adres.country %}
+                                {{c.country_name}}.
+                            {% endif %}
+                        {% endfor %}<br>
+                    </label>
+                    {% endif %}
+                {% endfor %}
+            </div><br>
+            <label>
+                <input type="checkbox" name="product_ids" value="{{products.id}}" id=""><span>Select item For
+                    place-order</span><br>
+            </label><br>
+            <button type="submit">Place Order</button>
+        </div>
+    </form>
+    <div style="padding-top: 200px;">
+
+    </div>
+</body>
+{% endblock %}

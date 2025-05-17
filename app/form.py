@@ -103,3 +103,7 @@ class Adress(forms.ModelForm):
     
 class Quantity(forms.Form):
     quantity = forms.IntegerField(label="quantity",min_value=1, initial=1)
+    
+class Orderdetails(forms.Form):
+    product_ids = forms.IntegerField(label="product_ids")
+    quantities = forms.IntegerField(label="quantities")

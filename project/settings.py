@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,6 +139,6 @@ EMAIL_HOST_PASSWORD = 'xdhhvdfujjzpjekp'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/protected/'
+LOGIN_URL = reverse_lazy('app:loginpage')
+# LOGIN_REDIRECT_URL = reverse_lazy('app:protected_view')
 # APPEND_SLASH = False
